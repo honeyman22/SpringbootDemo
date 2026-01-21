@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package com.example.demo.dao.impl;
 
-import com.example.demo.dao.impl.AuthorDaoImpl;
+import com.example.demo.dao.utils.TestDataUtils;
 import com.example.demo.domain.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ public class AuthorDaoImplTest {
 
     @Test
     public void testCreateAuthorGeneratesCorrectSql() {
-        Author author = Author.builder().id(1L).name("Nishan Bhattarai").age(28).build();
+        Author author = TestDataUtils.createTestAuthor();
         underTest.create(author);
 
         verify(jdbcTemplate).update(eq("INSERT INTO authors (id, name, age) VALUES (?, ?, ?)"),

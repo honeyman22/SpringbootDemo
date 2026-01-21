@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package com.example.demo.dao.impl;
 
-import com.example.demo.dao.impl.BookDaoImpl;
+import com.example.demo.dao.utils.TestDataUtils;
 import com.example.demo.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,11 +23,7 @@ public class BookDaoImplTest {
 
     @Test
     public void testCreateBookGenerateCorrectSql() {
-        Book book =  Book.builder().
-                isbn("1234-456-7890").
-                title("Pyscology of Money").
-                authorId(1L).
-                build();
+        Book book = TestDataUtils.createTestBook();
 
         underTest.create(book);
 
