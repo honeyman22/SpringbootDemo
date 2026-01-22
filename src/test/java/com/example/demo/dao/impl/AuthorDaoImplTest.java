@@ -46,4 +46,12 @@ public class AuthorDaoImplTest {
                 );
     }
 
+    @Test
+    public void testFindManyAuthorsGeneratesCorrectSql() {
+        underTest.findMany();
+        verify(jdbcTemplate).query(eq("SELECT * FROM authors"),
+                ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any()
+        );
+    }
+
 }

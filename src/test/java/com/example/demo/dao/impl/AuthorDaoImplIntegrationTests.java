@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,5 +35,20 @@ public class AuthorDaoImplIntegrationTests {
         assertThat(result).isPresent();
         assertThat(result.get()).isEqualTo(author);
 
+    }
+
+    @Test
+    public void testAuthorFInManyWorksWell() {
+        Author author = TestDataUtils.createTestAuthor();
+        underTest.create(author);
+
+        Author authorB = TestDataUtils.createTestAuthorB();
+        underTest.create(authorB);
+
+        Author authorC = TestDataUtils.createTestAuthorC();
+        underTest.create(authorC);
+
+        List<Author> result = underTest.findMany();
+        assertThat(result).hasSize(3).containsExactly(author, authorB, authorC);
     }
 }

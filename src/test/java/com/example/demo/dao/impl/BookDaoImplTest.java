@@ -45,4 +45,14 @@ public class BookDaoImplTest {
                 eq("1234-456-7890")
                 );
     }
+
+    @Test
+    public void testFindManyBookGenerateCorrectSql() {
+        underTest.findAll();
+
+        verify(jdbcTemplate).
+                query(eq("SELECT * FROM books"),
+                ArgumentMatchers.<BookDaoImpl.BookRowMappers>any()
+                );
+    }
 }
