@@ -1,7 +1,12 @@
 package com.example.demo.dao.impl;
 
+
+import com.example.demo.dao.AuthorDao;
+import com.example.demo.dao.BookDao;
 import com.example.demo.dao.utils.TestDataUtils;
+import com.example.demo.domain.Book;
 import com.example.demo.domain.Author;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,28 +16,33 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
-public class AuthorDaoImplIntegrationTests {
+public class BookDaoImplIntegrationTest {
 
-    private AuthorDaoImpl underTest;
+    private BookDaoImpl underTest;
+    private AuthorDao authorDao;
 
     @Autowired
-    public AuthorDaoImplIntegrationTests(AuthorDaoImpl underTest) {
+     public BookDaoImplIntegrationTest(BookDaoImpl underTest,AuthorDao authorDao) {
         this.underTest = underTest;
+        this.authorDao = authorDao;
     }
 
 
     @Test
-    public void testAuthorCanBECreatedAndRecalled() {
+    public void testBookCanBeCreatedAndRecalled() {
+
         Author author = TestDataUtils.createTestAuthor();
-        underTest.create(author);
-        Optional<Author> result = underTest.findOne(author.getId());
+        authorDao.create(author);
+        Book book = TestDataUtils.createTestBook();
+        underTest.create(book);
+        Optional<Book>  result = underTest.findOne(book.getIsbn());
         assertThat(result).isPresent();
-        assertThat(result.get()).isEqualTo(author);
+        assertThat(result.get()).isEqualTo(book);
+
 
     }
+
 }
