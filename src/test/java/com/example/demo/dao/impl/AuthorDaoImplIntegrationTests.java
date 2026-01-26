@@ -41,14 +41,32 @@ public class AuthorDaoImplIntegrationTests {
     public void testAuthorFInManyWorksWell() {
         Author author = TestDataUtils.createTestAuthor();
         underTest.create(author);
-
         Author authorB = TestDataUtils.createTestAuthorB();
         underTest.create(authorB);
-
         Author authorC = TestDataUtils.createTestAuthorC();
         underTest.create(authorC);
-
         List<Author> result = underTest.findMany();
         assertThat(result).hasSize(3).containsExactly(author, authorB, authorC);
+    }
+
+
+    @Test
+    public void testAuthorUpdateWorksWell() {
+        Author author = TestDataUtils.createTestAuthor();
+        underTest.create(author);
+        author.setName("UPDATED");
+        underTest.update(author.getId(), author);
+        Optional<Author> result = underTest.findOne(author.getId());
+        assertThat(result).isPresent();
+        assertThat(result.get()).isEqualTo(author);
+    }
+
+    @Test
+    public void testAuthorDeleteWorksWell() {
+        Author author = TestDataUtils.createTestAuthor();
+        underTest.create(author);
+        underTest.delete(author.getId());
+        Optional<Author> result = underTest.findOne(author.getId());
+        assertThat(result).isEmpty();
     }
 }
