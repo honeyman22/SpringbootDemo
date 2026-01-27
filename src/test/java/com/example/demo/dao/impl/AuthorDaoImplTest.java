@@ -46,4 +46,40 @@ public class AuthorDaoImplTest {
                 );
     }
 
+    @Test
+    public void testFindManyAuthorsGeneratesCorrectSql() {
+        underTest.findMany();
+        verify(jdbcTemplate).query(eq("SELECT * FROM authors"),
+                ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any()
+        );
+    }
+
+    @Test
+    public void testUpdateAuthorGeneratesCorrectSql() {
+        Author author = TestDataUtils.createTestAuthor();
+
+        underTest.update(3L,author);
+
+        verify(jdbcTemplate).update(eq(
+                "UPDATE authors SET name = ?, age = ? WHERE id = ?"),
+                eq("Nishan Bhattarai"),
+                eq(28),
+                eq(3L)
+                );
+    }
+
+    @Test
+    public void testDeleteAuthorGeneratesCorrectSql() {
+        Author author = TestDataUtils.createTestAuthor();
+
+        underTest.delete(1L);
+
+        verify(jdbcTemplate).update(
+                eq("DELETE FROM authors WHERE id = ?"),
+                eq(1L)
+        );
+
+
+    }
+
 }

@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -33,7 +34,6 @@ public class BookDaoImplIntegrationTest {
 
     @Test
     public void testBookCanBeCreatedAndRecalled() {
-
         Author author = TestDataUtils.createTestAuthor();
         authorDao.create(author);
         Book book = TestDataUtils.createTestBook();
@@ -42,7 +42,23 @@ public class BookDaoImplIntegrationTest {
         assertThat(result).isPresent();
         assertThat(result.get()).isEqualTo(book);
 
+    }
 
+    @Test
+    public void testBookFindAllWorksWell() {
+        Author author = TestDataUtils.createTestAuthor();
+        authorDao.create(author);
+        Book book = TestDataUtils.createTestBook();
+        underTest.create(book);
+
+        Book book2 = TestDataUtils.createTestBookB();
+        underTest.create(book2);
+
+        Book book3 = TestDataUtils.createTestBookC();
+        underTest.create(book3);
+
+        List<Book> result = underTest.findAll();
+        assertThat(result).hasSize(3).containsExactly(book, book2, book3);
     }
 
 }
