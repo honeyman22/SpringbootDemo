@@ -55,4 +55,19 @@ public class BookDaoImplTest {
                 ArgumentMatchers.<BookDaoImpl.BookRowMappers>any()
                 );
     }
+
+    @Test
+    public void testUpdateBookGenerateCorrectSql() {
+
+
+
+        underTest.update("1234-456-7890", TestDataUtils.createTestBook());
+
+        verify(jdbcTemplate).update(
+                eq("UPDATE books SET isbn = ?, title = ? WHERE isbn = ?"),
+                eq("1234-456-7890"),
+                eq("Pyscology of Money"),
+                eq("1234-456-7890")
+        );
+    }
 }
