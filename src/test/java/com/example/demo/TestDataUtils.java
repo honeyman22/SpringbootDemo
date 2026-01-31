@@ -1,4 +1,4 @@
-package com.example.demo.dao.utils;
+package com.example.demo;
 
 import com.example.demo.domain.Author;
 import com.example.demo.domain.Book;
