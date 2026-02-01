@@ -2,7 +2,7 @@ package com.example.demo.repositories;
 
 import com.example.demo.TestDataUtils;
 import com.example.demo.domain.Book;
-import com.example.demo.domain.Author;
+import com.example.demo.domain.AuthorEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +32,7 @@ public class BookRepositoryIntegrationTest {
 
     @Test
     public void testBookCanBeCreatedAndRecalled() {
-        Author author = TestDataUtils.createTestAuthor();
+        AuthorEntity author = TestDataUtils.createTestAuthor();
         Book book = TestDataUtils.createTestBook(author);
         Book savedBook = underTest.save(book);
         Optional<Book>  result = underTest.findById(book.getIsbn());
@@ -43,7 +43,7 @@ public class BookRepositoryIntegrationTest {
 
     @Test
     public void testBookFindAllWorksWell() {
-        Author author = TestDataUtils.createTestAuthor();
+        AuthorEntity author = TestDataUtils.createTestAuthor();
         Book book = TestDataUtils.createTestBook(author);
         Book savedBookA = underTest.save(book);
 
@@ -59,7 +59,7 @@ public class BookRepositoryIntegrationTest {
 
     @Test
     public void testBookUpdateWorksWell() {
-        Author author = TestDataUtils.createTestAuthor();
+        AuthorEntity author = TestDataUtils.createTestAuthor();
         Book book = TestDataUtils.createTestBook(author);
 
         book.setIsbn("123");
@@ -73,7 +73,7 @@ public class BookRepositoryIntegrationTest {
 
     @Test
     public void testBookDeleteWorksWell() {
-        Author author = TestDataUtils.createTestAuthor();
+        AuthorEntity author = TestDataUtils.createTestAuthor();
         Book book = TestDataUtils.createTestBook(author);
 
         Book savedBook = underTest.save(book);
