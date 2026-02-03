@@ -1,9 +1,11 @@
 package com.example.demo.repositories;
 
-import com.example.demo.domain.Book;
+import com.example.demo.domain.BookEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookRepository extends CrudRepository<Book, String> {
+public interface BookRepository extends CrudRepository<BookEntity, String> {
+
+
 }
