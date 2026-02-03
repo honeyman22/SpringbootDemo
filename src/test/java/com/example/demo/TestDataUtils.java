@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.domain.AuthorEntity;
-import com.example.demo.domain.Book;
+import com.example.demo.domain.BookEntity;
 
 public final class TestDataUtils {
 
@@ -17,23 +17,23 @@ public final class TestDataUtils {
         return AuthorEntity.builder().name("Ramhari paudel").age(28).build();
     }
 
-    public static Book createTestBook(final AuthorEntity author) {
-        return Book.builder().
+    public static BookEntity createTestBook(final AuthorEntity author) {
+        return BookEntity.builder().
                 isbn("1234-456-7890").
                 title("Pyscology of Money").
                 author(author).
                 build();
     }
 
-    public static Book createTestBookB(final AuthorEntity author) {
-        return Book.builder().
+    public static BookEntity createTestBookB(final AuthorEntity author) {
+        return BookEntity.builder().
                 isbn("1784-456-7890").
                 title("Atomic Habits").
                 author(author).
                 build();
     }
-    public static Book createTestBookC(final AuthorEntity author) {
-        return Book.builder().
+    public static BookEntity createTestBookC(final AuthorEntity author) {
+        return BookEntity.builder().
                 isbn("1894-456-7890").
                 title("12 weeks year").
                 author(author).
